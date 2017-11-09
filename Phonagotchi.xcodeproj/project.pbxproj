@@ -23,6 +23,7 @@
 		602CAE6C1984363A00C9FE49 /* PhonagotchiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 602CAE6B1984363A00C9FE49 /* PhonagotchiTests.m */; };
 		C06911C61FB4B0FC005B18B6 /* Pet.m in Sources */ = {isa = PBXBuildFile; fileRef = C06911C51FB4B0FC005B18B6 /* Pet.m */; };
 		C06911C81FB4DE0C005B18B6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C06911C71FB4DE0B005B18B6 /* Default-568h@2x.png */; };
+		C06911CA1FB4E582005B18B6 /* meow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C06911C91FB4E582005B18B6 /* meow.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		C06911C41FB4B0FC005B18B6 /* Pet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pet.h; sourceTree = "<group>"; };
 		C06911C51FB4B0FC005B18B6 /* Pet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pet.m; sourceTree = "<group>"; };
 		C06911C71FB4DE0B005B18B6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C06911C91FB4E582005B18B6 /* meow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = meow.mp3; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				602CAE501984363800C9FE49 /* LPGAppDelegate.m */,
 				602CAE521984363800C9FE49 /* Main.storyboard */,
 				602CAE551984363800C9FE49 /* LPGViewController.h */,
+				C06911C91FB4E582005B18B6 /* meow.mp3 */,
 				602CAE561984363800C9FE49 /* LPGViewController.m */,
 				C06911C41FB4B0FC005B18B6 /* Pet.h */,
 				C06911C51FB4B0FC005B18B6 /* Pet.m */,
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				602CAE591984363900C9FE49 /* Images.xcassets in Resources */,
+				C06911CA1FB4E582005B18B6 /* meow.mp3 in Resources */,
 				C06911C81FB4DE0C005B18B6 /* Default-568h@2x.png in Resources */,
 				602CAE4B1984363700C9FE49 /* InfoPlist.strings in Resources */,
 				602CAE541984363800C9FE49 /* Main.storyboard in Resources */,

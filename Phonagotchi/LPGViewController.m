@@ -8,6 +8,8 @@
 
 #import "LPGViewController.h"
 #import "Pet.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface LPGViewController ()
 
@@ -19,6 +21,8 @@
 
 
 @property UILongPressGestureRecognizer *lpGesture;
+
+@property AVAudioPlayer *player;
 
 @end
 
@@ -97,12 +101,27 @@
     [self.appleView addGestureRecognizer:self.lpGesture];
     self.appleView.userInteractionEnabled = YES;
     self.basketView.userInteractionEnabled = YES;
-
     [self.lpGesture addTarget:self action:@selector(imageWasPressed:)];
     
+    //create a tapGesture to make the pet make a sound when you doubletap on it
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
+    [self.petImageView addGestureRecognizer:tapGesture];
+    self.petImageView.userInteractionEnabled = YES;
+    [tapGesture setNumberOfTouchesRequired:2];
+    [tapGesture addTarget:self action:@selector(petWasTapped:)];
+    
+}
+//Create the method for making a sound when the pet is double tapped
+-(void)petWasTapped: (UITapGestureRecognizer *) sender {
+    
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"meow"ofType:@"mp3"];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    self.player.numberOfLoops = 1;
+    [self.player play];
 }
 
-// Create the method for changing the image is the petting is too fast
+// Create the method for changing the image if the petting is too fast
 - (void)imageWasPanned:(UIPanGestureRecognizer *)sender {
     CGFloat velocity = [sender velocityInView:self.petImageView].x;
     BOOL grumpyCat = [self.pet petCat:velocity];
@@ -110,7 +129,7 @@
         self.petImageView.image = [UIImage imageNamed:@"grumpy"];
     }
     }
-
+// Create the method for dragging apples to the pet
 -(void) imageWasPressed:(UILongPressGestureRecognizer *) sender {
     
     CGPoint location = [sender locationInView:self.view];
