@@ -59,12 +59,6 @@
     
     self.pet = [[Pet alloc] init];
     
-    // Create the penGestureRecognizer and add it to the petImageView
-    UIPanGestureRecognizer *petGesture = [[UIPanGestureRecognizer alloc] init];
-    [self.petImageView addGestureRecognizer:petGesture];
-    self.petImageView.userInteractionEnabled = YES;
-    [petGesture addTarget:self action:@selector(imageWasPanned:)];
-    
     //initialize the basketView
     self.basketView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.basketView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -96,7 +90,13 @@
     NSLayoutConstraint *appleleading = [NSLayoutConstraint constraintWithItem:self.appleView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.basketView attribute:NSLayoutAttributeLeading multiplier:1 constant:10];
     appleleading.active = YES;
     
-    //create a pinchGestureView
+    // Create the panGestureRecognizer and add it to the petImageView
+    UIPanGestureRecognizer *petGesture = [[UIPanGestureRecognizer alloc] init];
+    [self.petImageView addGestureRecognizer:petGesture];
+    self.petImageView.userInteractionEnabled = YES;
+    [petGesture addTarget:self action:@selector(imageWasPanned:)];
+    
+    //create a longPressGesture to drag the apples
     self.lpGesture = [[UILongPressGestureRecognizer alloc] init];
     [self.appleView addGestureRecognizer:self.lpGesture];
     self.appleView.userInteractionEnabled = YES;
@@ -110,7 +110,12 @@
     [tapGesture setNumberOfTouchesRequired:2];
     [tapGesture addTarget:self action:@selector(petWasTapped:)];
     
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(isCatSleeping) userInfo:nil repeats:YES];
+    
 }
+
+
+
 //Create the method for making a sound when the pet is double tapped
 -(void)petWasTapped: (UITapGestureRecognizer *) sender {
     
@@ -129,6 +134,7 @@
         self.petImageView.image = [UIImage imageNamed:@"grumpy"];
     }
     }
+
 // Create the method for dragging apples to the pet
 -(void) imageWasPressed:(UILongPressGestureRecognizer *) sender {
     
@@ -170,7 +176,26 @@
                 }];
     }
     }
+    
 }
+
+-(void)isCatSleeping {
+    [self.pet catSleeping];
+    if (self.pet.isAsleep) {
+        self.petImageView.image = [UIImage imageNamed:@"sleeping"];
+    }
+    else{
+        self.petImageView.image = [UIImage imageNamed:@"default"];
+    }
+}
+
+
+-(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    if (event.type == UIEventSubtypeMotionShake) {
+        self.pet.isAsleep = NO;
+    }
+}
+
 
 
 @end

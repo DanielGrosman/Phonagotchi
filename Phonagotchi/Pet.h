@@ -11,9 +11,11 @@
 @interface Pet : NSObject
 
 @property (readonly) BOOL isGrumpy;
+@property (nonatomic) BOOL isAsleep;
+@property (nonatomic, assign) int restfulness;
 
 - (BOOL)petCat:(CGFloat)velocity;
-
+- (void)catSleeping;
 
 
 @end
