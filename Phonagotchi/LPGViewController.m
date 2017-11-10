@@ -18,10 +18,7 @@
 @property (nonatomic) UIImageView *appleViewTwo;
 @property (nonatomic) UIImageView *basketView;
 @property Pet *pet;
-
-
 @property UILongPressGestureRecognizer *lpGesture;
-
 @property AVAudioPlayer *player;
 
 @end
@@ -33,14 +30,10 @@
     [super viewDidLoad];
 	
     self.view.backgroundColor = [UIColor colorWithRed:(252.0/255.0) green:(240.0/255.0) blue:(228.0/255.0) alpha:1.0];
-    
     self.petImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.petImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    
     self.petImageView.image = [UIImage imageNamed:@"default"];
-    
     [self.view addSubview:self.petImageView];
-    
     [NSLayoutConstraint constraintWithItem:self.petImageView
                                   attribute:NSLayoutAttributeCenterX
                                   relatedBy:NSLayoutRelationEqual
@@ -56,10 +49,9 @@
                                   attribute:NSLayoutAttributeCenterY
                                  multiplier:1.0
                                    constant:0.0].active = YES;
-    
     self.pet = [[Pet alloc] init];
     
-    //initialize the basketView
+    //initialize the basketView and set it's constraints to put it in the bottom left hand corner
     self.basketView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.basketView.translatesAutoresizingMaskIntoConstraints = NO;
     self.basketView.image = [UIImage imageNamed:@"bucket"];
@@ -74,8 +66,7 @@
     NSLayoutConstraint *basketleading = [NSLayoutConstraint constraintWithItem:self.basketView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:10];
     basketleading.active = YES;
     
-    
-    //initialize the AppleView
+    //initialize the AppleView and it's constraints to put it on top of the basket
     self.appleView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.appleView.translatesAutoresizingMaskIntoConstraints = NO;
     self.appleView.image = [UIImage imageNamed:@"apple"];
@@ -96,7 +87,7 @@
     self.petImageView.userInteractionEnabled = YES;
     [petGesture addTarget:self action:@selector(imageWasPanned:)];
     
-    //create a longPressGesture to drag the apples
+    //create a longPressGesture to drag the apples and add it to the appleView
     self.lpGesture = [[UILongPressGestureRecognizer alloc] init];
     [self.appleView addGestureRecognizer:self.lpGesture];
     self.appleView.userInteractionEnabled = YES;
@@ -109,12 +100,10 @@
     self.petImageView.userInteractionEnabled = YES;
     [tapGesture setNumberOfTouchesRequired:2];
     [tapGesture addTarget:self action:@selector(petWasTapped:)];
-    
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(isCatSleeping) userInfo:nil repeats:YES];
-    
+
+    // sets a timer on the isCatSleeping method, making it change it's sleeping state every 10 seconds
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(isCatSleeping) userInfo:nil repeats:YES];
 }
-
-
 
 //Create the method for making a sound when the pet is double tapped
 -(void)petWasTapped: (UITapGestureRecognizer *) sender {
@@ -126,7 +115,7 @@
     [self.player play];
 }
 
-// Create the method for changing the image if the petting is too fast
+// Creates the method for changing the pet's image to grumpy if the 'petting' it too fast
 - (void)imageWasPanned:(UIPanGestureRecognizer *)sender {
     CGFloat velocity = [sender velocityInView:self.petImageView].x;
     BOOL grumpyCat = [self.pet petCat:velocity];
@@ -135,7 +124,7 @@
     }
     }
 
-// Create the method for dragging apples to the pet
+// Create the method for dragging apples to the pet. When the gesture begins, a new instance of apple is created. The StateChanged allows the apple to be dragged, and when it is ended, the method checks if the apple frame and the petImage frame intersect. If they do, the apple's alpha fades, and if the frames don't intersect, the animation shows the apple dropping off the screen
 -(void) imageWasPressed:(UILongPressGestureRecognizer *) sender {
     
     CGPoint location = [sender locationInView:self.view];
@@ -178,7 +167,7 @@
     }
     
 }
-
+// calls the catSleeping method which changes the pet's restfulness based on whether it is awake or not. If the pet is sleeping, the image changes to sleeping, otherwise it changes back to the default image
 -(void)isCatSleeping {
     [self.pet catSleeping];
     if (self.pet.isAsleep) {
@@ -189,13 +178,11 @@
     }
 }
 
-
+// if the phone is shaken, the isAsleep property is set to NO so the pet 'wakes up'
 -(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     if (event.type == UIEventSubtypeMotionShake) {
         self.pet.isAsleep = NO;
     }
 }
-
-
 
 @end
