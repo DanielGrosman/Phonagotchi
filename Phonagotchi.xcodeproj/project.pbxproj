@@ -211,6 +211,9 @@
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Lighthouse Labs";
 				TargetAttributes = {
+					602CAE3C1984363700C9FE49 = {
+						DevelopmentTeam = DT9P77872P;
+					};
 					602CAE5D1984363900C9FE49 = {
 						TestTargetID = 602CAE3C1984363700C9FE49;
 					};
@@ -413,10 +416,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DT9P77872P;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Phonagotchi/Phonagotchi-Prefix.pch";
 				INFOPLIST_FILE = "Phonagotchi/Phonagotchi-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.LighthouseLabs.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = Daniel.Grosman.Phonagotchi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -426,10 +430,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DT9P77872P;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Phonagotchi/Phonagotchi-Prefix.pch";
 				INFOPLIST_FILE = "Phonagotchi/Phonagotchi-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.LighthouseLabs.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = Daniel.Grosman.Phonagotchi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

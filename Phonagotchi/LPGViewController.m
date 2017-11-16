@@ -228,7 +228,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
     [self.petImageView addGestureRecognizer:tapGesture];
     self.petImageView.userInteractionEnabled = YES;
-    [tapGesture setNumberOfTouchesRequired:2];
+    [tapGesture setNumberOfTapsRequired:2];
     [tapGesture addTarget:self action:@selector(petWasTapped:)];
 }
 
